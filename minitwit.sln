@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.Application", "min
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.Domain", "minitwit.Domain\minitwit.Domain.csproj", "{1FBD076D-0278-40A7-BA6C-464FC6AF7C1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit.Api.Test", "minitwit.Api.Test\minitwit.Api.Test.csproj", "{F1805970-2221-4647-874A-EF27051473D7}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +73,17 @@ Global
 		{1FBD076D-0278-40A7-BA6C-464FC6AF7C1E}.Release|x64.Build.0 = Release|Any CPU
 		{1FBD076D-0278-40A7-BA6C-464FC6AF7C1E}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FBD076D-0278-40A7-BA6C-464FC6AF7C1E}.Release|x86.Build.0 = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|x64.Build.0 = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1805970-2221-4647-874A-EF27051473D7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
