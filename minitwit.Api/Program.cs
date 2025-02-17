@@ -7,16 +7,19 @@ using minitwit.Application.Interfaces;
 using minitwit.Application.Services;
 using minitwit.Infrastructure.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+var _args = args;
+var builder = WebApplication.CreateBuilder(_args);
 
 builder.Services.AddDistributedMemoryCache();
+
 var connectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=yourpassword;"
-    ;//builder.Configuration.GetConnectionString("DbConnection");
+;//builder.Configuration.GetConnectionString("DbConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql("Host=localhost;Port=5433;Database=postgres;Username=root;Password=root;"));
 
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = false;
     options.Cookie.IsEssential = false;
@@ -47,17 +50,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("jg4mywvyYnFJgJhLT+6AmMllIL4t/86qY75kt42HRmV4=")),
-            ValidateIssuer = false, 
+            ValidateIssuer = false,
             ValidateAudience = false,
             ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero 
+            ClockSkew = TimeSpan.Zero
         };
     });
 
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -76,6 +78,7 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 app.MapControllers();
-app.Run();
 
 app.Run();
+
+public partial class Program { }
