@@ -4,11 +4,11 @@ using Xunit;
 
 namespace minitwit.Api.Test;
 
-public class TestWebApi : IClassFixture<WebApplicationFactory<Program>>
+public class TestWebApi : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly CustomWebApplicationFactory<Program> _factory;
 
-    public TestWebApi (WebApplicationFactory<Program> factory)
+    public TestWebApi (CustomWebApplicationFactory<Program> factory)
     {
         _factory = factory;
     }
@@ -18,7 +18,7 @@ public class TestWebApi : IClassFixture<WebApplicationFactory<Program>>
     {
         // Arrange
         var client = _factory.CreateClient();
-        string url = "/";
+        string url = "/api/twit/public/?page=0";
 
         // Act
         var reponse = await client.GetAsync(url);
