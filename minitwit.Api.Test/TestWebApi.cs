@@ -1,14 +1,15 @@
+using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
 namespace minitwit.Api.Test;
 
-public class TestWebApi : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TestWebApi : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
+    private readonly WebApplicationFactory<Program> _factory;
 
-    public TestWebApi (CustomWebApplicationFactory<Program> factory)
+    public TestWebApi (WebApplicationFactory<Program> factory)
     {
         _factory = factory;
     }
@@ -18,7 +19,10 @@ public class TestWebApi : IClassFixture<CustomWebApplicationFactory<Program>>
     {
         // Arrange
         var client = _factory.CreateClient();
-        string url = "/api/twit/public/?page=0";
+        client.DefaultRequestHeaders.ExpectContinue = false; 
+        client.DefaultRequestHeaders.Authorization = 
+        new AuthenticationHeaderValue("Bearer", "your_test_jwt_token");
+        string url = "/api/twit/hejkaj";
 
         // Act
         var reponse = await client.GetAsync(url);

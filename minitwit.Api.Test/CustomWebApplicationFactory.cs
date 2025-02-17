@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.HttpsPolicy;
 using minitwit.Infrastructure.Data;
+
 
 public class CustomWebApplicationFactory<TProgram>
     : WebApplicationFactory<TProgram> where TProgram : class
@@ -13,32 +15,22 @@ public class CustomWebApplicationFactory<TProgram>
     {
         builder.ConfigureServices(services =>
         {
+            // Remove the PostgreSQL db context
             var dbContextDescriptor = services.SingleOrDefault(
-                d => d.ServiceType ==
-                    typeof(DbContextOptions<ApplicationDbContext>));
-
+                d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
             services.Remove(dbContextDescriptor!);
 
-            var dbConnectionDescriptor = services.SingleOrDefault(
-                d => d.ServiceType ==
-                    typeof(DbConnection));
-
-            services.Remove(dbConnectionDescriptor!);
-
-            // Create open SqliteConnection so EF won't automatically close it.
-            services.AddSingleton<DbConnection>(container =>
+            // Add SQLite instead of PostgreSQL
+            services.AddDbContext<ApplicationDbContext>((container, options) =>
             {
                 var connection = new SqliteConnection("DataSource=:memory:");
                 connection.Open();
-
-                return connection;
-            });
-
-            services.AddDbContext<ApplicationDbContext>((container, options) =>
-            {
-                var connection = container.GetRequiredService<DbConnection>();
                 options.UseSqlite(connection);
             });
+
+            var scope = services.BuildServiceProvider().CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            dbContext.Database.Migrate();  // Apply migrations
         });
 
         builder.UseEnvironment("Development");

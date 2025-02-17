@@ -16,6 +16,14 @@ public class TwitsController : ControllerBase
         _twitsService = twitsService;
     }
 
+    [AllowAnonymous]
+    [HttpGet("hejkaj")]
+    public async Task<IActionResult> Test()
+    {
+        Console.WriteLine("hejkaj");
+        return Ok();
+    }
+
     [HttpGet("public")]
     public async Task<IActionResult> GetPublicTwits([FromQuery] int page = default)
     {
