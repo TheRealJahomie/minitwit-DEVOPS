@@ -221,6 +221,9 @@ project.lock.json
 # UWP Projects
 AppPackages/
 
+# Vagrant
+.vagrant/
+
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
