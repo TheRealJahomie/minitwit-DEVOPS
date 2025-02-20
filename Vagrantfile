@@ -55,6 +55,7 @@ Vagrant.configure("2") do |config|
       sudo apt install npm
       npm install
       npm run build
+      npm run start
     SHELL
   end
 end
